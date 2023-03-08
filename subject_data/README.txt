@@ -1,0 +1,2 @@
+,index,MAXLL_FACTOR_VAR,MAXLL_EXCLUDE_NEUTRAl
+0,0,TrialType,True

@@ -1,0 +1,4 @@
+,TrialType,egs,alpha,r,ResponseSwitch_mean,ResponseSwitch_std,HCPID,LL,ResponseSwitch
+0,Neutral,0.0,0.1,1,0.0,0.0,114924_fnca,-1.9048787278035735,0.5
+1,Punishment,0.0,0.1,1,0.6,0.4900940253900043,114924_fnca,-1.9048787278035735,0.76
+2,Reward,0.0,0.1,1,0.1768,0.3816520491616719,114924_fnca,-1.9048787278035735,0.24

@@ -1,0 +1,4 @@
+,HCPID,TrialType,ResponseSwitch
+0,128127_fnca,Neutral,0.5
+1,128127_fnca,Punishment,0.84
+2,128127_fnca,Reward,0.96
