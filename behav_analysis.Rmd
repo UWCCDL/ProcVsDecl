@@ -1,0 +1,157 @@
+---
+title: "CherAnalysis"
+output:
+  html_document:
+    code_folding: hide
+    theme: yeti
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(modeest)
+library(broom)
+library(broom.mixed)
+library(reshape2)
+#library(gglasso)
+library(glmnet)
+library(lme4)
+library(lmerTest)
+library(sjPlot)
+library(pscl)
+library(readr)
+
+#library(magrittr)
+## Graphics
+library(ggplot2)
+library(ggthemes)
+library(ggrepel)
+library(ggExtra)
+library(ggsci)
+library(scales)
+library(viridis)
+library(cowplot)
+
+## tables
+library(kableExtra)
+library(xtable)
+
+# Date functions
+library(anytime)
+library(lubridate)
+
+```
+
+
+# Load
+
+Load all subjects
+
+```{r}
+bdata <- NULL
+#data <- tibble()
+```
+
+```{r}
+for (folder in dir("subject_data/")[grep("fnca", dir("subject_data/"))]) {
+  partial <- read_csv(paste("subject_data", 
+                            folder,
+                            "subject.csv", sep="/"),
+                      show_col_types = FALSE)
+  partial$Subject <- folder
+  if (is.null(bdata)) {
+    bdata <- partial
+  } else {
+    bdata <- full_join(bdata, partial) 
+  }
+}
+
+```
+
+
+Load the model assignments
+
+```{r}
+assignments <- read_csv("LL_proc_decl_new.csv")
+```
+
+Merge the two, to make sure we have the same data
+
+```{r}
+full <- full_join(bdata, assignments, by="HCPID")
+```
+
+```{r}
+
+adata <- full %>%
+  group_by(HCPID, TrialType, BlockType) %>%
+  summarise(ResponseSwitch = mean(ResponseSwitch),
+            Persistance = mean(ConsecSameResp),
+            MaxPersistance = max(ConsecSameResp),
+            RT = mean(RT),
+            Model=mlv(best.model),
+            deltaLL = mean(diff.LL))
+```
+
+```{r}
+adata <- adata %>% filter(!is.na(BlockType))
+
+k <- adata %>% 
+  group_by(BlockType, Model, HCPID) %>%
+  summarise(Persistance = mean(Persistance),
+            RT=mean(RT),
+            deltaLL=mean(deltaLL))
+
+ggplot(k, aes(x=Model, y=Persistance, fill=Model, group=Model)) +
+  facet_wrap(~BlockType) +
+  stat_summary(geom="bar", position = "dodge") +
+  stat_summary(geom="errorbar", position="dodge", width=0.1) +
+  scale_fill_d3() +
+  theme_minimal()
+```
+
+Analysis
+
+```{r}
+
+# 150523_fnca has only one block type
+k <- filter(k, HCPID != "150523_fnca")
+#mod <- lm(Persistance ~ BlockType * Model, data=k)
+
+a1 <- aov(Persistance ~ (BlockType*Model) + Error(BlockType/HCPID), k)
+a1 %>%
+  tidy() %>%
+  kable() %>%
+  kable_styling(bootstrap_options=c("striped", "hover"))
+```
+
+Other visualizations
+
+```{r}
+ggplot(adata, aes(x=TrialType, y=ResponseSwitch, col=Model, group=Model)) +
+  facet_wrap(~ BlockType) +
+  stat_summary(geom="point") +
+  stat_summary(geom="errorbar", width=0.1) +
+  stat_summary(geom="line")+
+  scale_color_d3() +
+  coord_cartesian(ylim=c(0,1)) +
+  theme_minimal()
+
+
+ggplot(adata, aes(x=Model, y=RT, fill=Model, group=Model)) +
+  facet_wrap(~BlockType) +
+  stat_summary(geom="bar", position = "dodge") +
+  stat_summary(geom="errorbar", position="dodge", width=0.1) +
+  scale_fill_d3() +
+  theme_minimal()
+```
