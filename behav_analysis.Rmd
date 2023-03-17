@@ -72,7 +72,8 @@ for (folder in dir("subject_data/")[grep("fnca", dir("subject_data/"))]) {
   if (is.null(bdata)) {
     bdata <- partial
   } else {
-    bdata <- full_join(bdata, partial) 
+    #bdata <- full_join(bdata, partial) 
+    bdata <- rbind(bdata, partial) 
   }
 }
 
@@ -82,37 +83,57 @@ for (folder in dir("subject_data/")[grep("fnca", dir("subject_data/"))]) {
 Load the model assignments
 
 ```{r}
-assignments <- read_csv("LL_proc_decl_new.csv")
+assignments <- read_csv("LL_proc_decl2_new.csv", show_col_types = FALSE)
 ```
 
 Merge the two, to make sure we have the same data
 
 ```{r}
 full <- full_join(bdata, assignments, by="HCPID")
+full <- full %>% filter(!is.na(BlockType), !is.na(PreviousFeedback))
 ```
+
+
+# Group Differences in Response Switch
 
 ```{r}
 
-adata <- full %>%
-  group_by(HCPID, TrialType, BlockType) %>%
+adata_feedback <- full %>%
+  group_by(HCPID, PreviousFeedback, BlockType) %>%
   summarise(ResponseSwitch = mean(ResponseSwitch),
-            Persistance = mean(ConsecSameResp),
-            MaxPersistance = max(ConsecSameResp),
             RT = mean(RT),
             Model=mlv(best.model),
             deltaLL = mean(diff.LL))
 ```
 
+And now, let's visualize
 ```{r}
-adata <- adata %>% filter(!is.na(BlockType))
+ggplot(adata_feedback, aes(x=PreviousFeedback, y=ResponseSwitch, fill=Model, col=Model)) +
+  facet_wrap(~BlockType) +
+  stat_summary(geom="point", fun.data="mean_se", alpha=0.6) +
+  stat_summary(geom="errorbar", fun.data = "mean_se", width=0.1) +
+  stat_summary(geom="line", aes(group=Model), fun.data="mean_se") +
+  scale_color_d3() +
+  theme_minimal()
+```
 
-k <- adata %>% 
-  group_by(BlockType, Model, HCPID) %>%
-  summarise(Persistance = mean(Persistance),
-            RT=mean(RT),
-            deltaLL=mean(deltaLL))
+# Group Differences in Persistance
 
-ggplot(k, aes(x=Model, y=Persistance, fill=Model, group=Model)) +
+Now, let's look at the data by block:
+
+```{r}
+adata_block <- full %>%
+  filter(!is.na(BlockType)) %>%
+  filter(!is.na(PreviousFeedback)) %>%
+  group_by(HCPID, BlockType) %>%
+  summarise(Persistance = mean(ConsecSameResp),
+            MaxPersistance = max(ConsecSameResp),
+            RT = mean(RT),
+            Model=mlv(best.model),
+            deltaLL = mean(diff.LL))
+
+
+ggplot(adata_block, aes(x=Model, y=MaxPersistance, fill=Model, group=Model)) +
   facet_wrap(~BlockType) +
   stat_summary(geom="bar", position = "dodge") +
   stat_summary(geom="errorbar", position="dodge", width=0.1) +
@@ -120,38 +141,16 @@ ggplot(k, aes(x=Model, y=Persistance, fill=Model, group=Model)) +
   theme_minimal()
 ```
 
-Analysis
+To analyze this, we will use generalized linear model with a Poisson distribution:
 
 ```{r}
 
-# 150523_fnca has only one block type
-k <- filter(k, HCPID != "150523_fnca")
-#mod <- lm(Persistance ~ BlockType * Model, data=k)
+mod1 <- glm(MaxPersistance ~ BlockType* Model ,  family="poisson", weights=abs(adata_block$deltaLL), data=adata_block)
 
-a1 <- aov(Persistance ~ (BlockType*Model) + Error(BlockType/HCPID), k)
-a1 %>%
+mod1 %>%
   tidy() %>%
   kable() %>%
   kable_styling(bootstrap_options=c("striped", "hover"))
-```
 
-Other visualizations
-
-```{r}
-ggplot(adata, aes(x=TrialType, y=ResponseSwitch, col=Model, group=Model)) +
-  facet_wrap(~ BlockType) +
-  stat_summary(geom="point") +
-  stat_summary(geom="errorbar", width=0.1) +
-  stat_summary(geom="line")+
-  scale_color_d3() +
-  coord_cartesian(ylim=c(0,1)) +
-  theme_minimal()
-
-
-ggplot(adata, aes(x=Model, y=RT, fill=Model, group=Model)) +
-  facet_wrap(~BlockType) +
-  stat_summary(geom="bar", position = "dodge") +
-  stat_summary(geom="errorbar", position="dodge", width=0.1) +
-  scale_fill_d3() +
-  theme_minimal()
+tab_model(mod1)
 ```
