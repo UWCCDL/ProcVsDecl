@@ -8,8 +8,10 @@ In the new analysis, individuals best-fit by the Declarative model show signific
 ![Probability of Response Switch](responseswitch.png) 
 
 2. The maximum number of consecutive identical responses
+
 ![Maximum number of identical responses](persistance.png)
 
 3. The associated response times
+
 ![Response times](responsetimes.png)  
 
