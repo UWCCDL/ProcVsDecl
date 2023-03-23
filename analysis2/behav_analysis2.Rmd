@@ -104,7 +104,7 @@ ggplot(adata_feedback, aes(x=TrialType, y=ResponseSwitch, col=Model)) +
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggsave("responseswitch.png")
+ggsave("responseswitch.png", dpi=72)
 ```
 
 The analysis reveal a main effect of Model (Group):
@@ -125,7 +125,7 @@ tab_model(mod_feedback)
 
 Now, let's look at the data by block:
 
-```{r}
+```{r, fig.width=5, fig.height=5}
 adata_block <- full %>%
   group_by(HCPID, BlockTypeCoded) %>%
   summarise(Persistance = mean(ConsecSameResp),
@@ -148,7 +148,7 @@ ggplot(adata_block, aes(x=Block, y=MaxPersistance, col=Model)) +
   scale_color_d3() +
   theme_minimal()
 
-ggsave("persistance.png")
+ggsave("persistance.png", dpi=72)
 ```
 
 To analyze this, we will use generalized linear model with a Poisson distribution. The choice of a Poisson distribution is given by the fact that the distribution of longest consecutive streaks (persistance) should obey a Poisson. Just in case, here is the actual distribution.
@@ -223,7 +223,7 @@ ggplot(adata_block, aes(x=Block, y=RT, col=Model, group=Model)) +
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggsave("responsetimes.png")
+ggsave("responsetimes.png", dpi=72)
 ```
 
 
