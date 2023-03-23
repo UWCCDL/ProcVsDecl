@@ -1,0 +1,168 @@
+---
+title: "CherAnalysis"
+output:
+  html_document:
+    code_folding: hide
+    theme: yeti
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(broom)
+library(broom.mixed)
+library(reshape2)
+
+## Stats
+library(lme4)      # Mixed models
+library(lmerTest)
+library(modeest)   # Mode estimation
+library(vcd)       # Fit of count data
+library(sjPlot)
+library(pscl)
+library(readr)
+
+## Graphics
+library(ggplot2)
+library(ggthemes)
+library(ggExtra)
+library(ggsci)
+library(scales)
+library(viridis)
+
+## tables
+library(kableExtra)
+library(xtable)
+```
+
+
+# Load
+
+Load all subjects
+
+```{r}
+bdata <- read_csv("gambling_clean_data.csv", show_col_types = F)
+```
+
+
+
+
+Load the model assignments
+
+```{r}
+assignments <- read_csv("LL_model2.csv", show_col_types = FALSE)
+```
+
+Merge the two, to make sure we have the same data
+
+```{r}
+full <- full_join(bdata, assignments, by="HCPID")
+full <- full %>% filter(!is.na(BlockType), !is.na(TrialType))
+```
+
+
+# Group Differences in Response Switch
+
+```{r}
+adata_feedback <- full %>%
+  group_by(HCPID, TrialType, BlockType) %>%
+  filter(!is.na(PreviousFeedback)) %>%
+  summarise(ResponseSwitch = mean(ResponseSwitch),
+            RT = mean(RT),
+            Model=mlv(best.model),
+            deltaLL = mean(diff.LL))
+```
+
+And now, let's visualize
+```{r}
+ggplot(adata_feedback, aes(x=TrialType, y=ResponseSwitch, fill=Model, col=Model)) +
+  facet_wrap(~BlockType) +
+  stat_summary(geom="point", fun.data="mean_se", size=3) +
+  stat_summary(geom="errorbar", fun.data = "mean_se", width=0.1) +
+  stat_summary(geom="line", aes(group=Model), fun.data="mean_se") +
+  coord_cartesian(ylim=c(0,.75)) +
+  scale_color_d3() +
+  theme_minimal()
+```
+
+# Group Differences in Persistance
+
+Now, let's look at the data by block:
+
+```{r}
+adata_block <- full %>%
+  filter(!is.na(BlockType)) %>%
+  filter(!is.na(PreviousFeedback)) %>%
+  group_by(HCPID, BlockType) %>%
+  summarise(Persistance = mean(ConsecSameResp),
+            MaxPersistance = max(ConsecSameResp),
+            RT = mean(RT),
+            Model=mlv(best.model),
+            deltaLL = mean(diff.LL))
+
+
+ggplot(adata_block, aes(x=Model, y=MaxPersistance, fill=Model, group=Model)) +
+  facet_wrap(~BlockType) +
+  stat_summary(geom="bar",fun.data = mean_se, position = "dodge") +
+  stat_summary(geom="errorbar", fun.data=mean_se, position="dodge", width=0.1) +
+  scale_fill_d3() +
+  theme_pander()
+```
+
+To analyze this, we will use generalized linear model with a Poisson distribution. The choice of a Poisson distribution is given by the fact that the distribution of longest consecutive streaks (persistance) should obey a Poisson. Just in case, here is the actual distribution.
+
+```{r}
+ggplot(adata_block, aes(x=MaxPersistance)) +
+  geom_histogram(fill="grey", col="white", position = "identity", bins=15) +
+  theme_pander()
+```
+
+We first fit a Poisson model
+
+```{r}
+
+mod1 <- glm(MaxPersistance ~ Model * BlockType,  family="poisson", weights=abs(adata_block$deltaLL), data=adata_block)
+
+mod1 %>%
+  tidy() %>%
+  kable() %>%
+  kable_styling(bootstrap_options=c("striped", "hover"))
+
+tab_model(mod1)
+```
+
+It is possible to conceptualize the Max Persistance count as a Negative binomial
+
+```{r}
+mod2 <- MASS::glm.nb(MaxPersistance ~ Model,  weights=abs(adata_block$deltaLL), data=adata_block)
+
+mod2 %>%
+  tidy() %>%
+  kable() %>%
+  kable_styling(bootstrap_options=c("striped", "hover"))
+
+tab_model(mod2)
+
+```
+
+Neiter one first the data well, TBH
+
+```{r}
+gf <- goodfit(adata_block$MaxPersistance, type= "nbinomial",method= "ML")
+summary(gf)
+plot(gf,main="Count data vs Negative Binomial distribution")
+
+gf <- goodfit(adata_block$MaxPersistance, type= "poisson",method= "ML")
+summary(gf)
+plot(gf,main="Count data vs Poisson distribution")
+```
