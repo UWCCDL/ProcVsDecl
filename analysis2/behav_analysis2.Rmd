@@ -103,12 +103,14 @@ ggplot(adata_feedback, aes(x=TrialType, y=ResponseSwitch, col=Model)) +
   scale_color_d3() +
   theme_minimal() +
   theme(legend.position = "bottom")
+
+ggsave("responseswitch.png")
 ```
 
 The analysis reveal a main effect of Model (Group):
 
 ```{r}
-mod_feedback <- glm(ResponseSwitch ~ Model * Block,  family="binomial", weights=abs(deltaLL), data=adata_feedback)
+mod_feedback <- glmer(ResponseSwitch ~ best.model * BlockTypeCoded + (1|HCPID),  family="binomial", weights=abs(diff.LL), data=full)
 
 mod_feedback %>%
   tidy() %>%
@@ -145,6 +147,8 @@ ggplot(adata_block, aes(x=Block, y=MaxPersistance, col=Model)) +
   ggtitle("Persistence by Model and Block Type") +
   scale_color_d3() +
   theme_minimal()
+
+ggsave("persistance.png")
 ```
 
 To analyze this, we will use generalized linear model with a Poisson distribution. The choice of a Poisson distribution is given by the fact that the distribution of longest consecutive streaks (persistance) should obey a Poisson. Just in case, here is the actual distribution.
@@ -218,6 +222,8 @@ ggplot(adata_block, aes(x=Block, y=RT, col=Model, group=Model)) +
   scale_color_d3() +
   theme_minimal() +
   theme(legend.position = "bottom")
+
+ggsave("responsetimes.png")
 ```
 
 
