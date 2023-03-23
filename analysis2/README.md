@@ -5,11 +5,11 @@ In the new analysis, individuals best-fit by the Declarative model show signific
 
 1. The probability of changing response from trial to trial
 
-!(responseswitch.png) 
+![Probability of Response Switch](responseswitch.png) 
 
-2. The maximum number of consecutive identical responses, and
-!(persistance.png)
+2. The maximum number of consecutive identical responses
+![Maximum number of identical responses](persistance.png)
 
 3. The associated response times
-!(responsetimes.png)  
+![Response times](responsetimes.png)  
 
