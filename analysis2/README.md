@@ -26,5 +26,5 @@ Procedural and Declarative participants differ in:
 
 Procedural and Declarative participants differentially engage different brain areas:
 
-![Task fMRI](tfMRI/cher_medialRH.png)  
+![Task fMRI](tfMRI_results/cher_medialRH.png)  
 
