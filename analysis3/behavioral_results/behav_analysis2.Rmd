@@ -51,7 +51,7 @@ library(xtable)
 Load all subjects
 
 ```{r}
-bdata <- read_csv("gambling_clean_data.csv", show_col_types = F)
+bdata <- read_csv("../gambling_clean_data.csv", show_col_types = F)
 ```
 
 
@@ -60,7 +60,7 @@ bdata <- read_csv("gambling_clean_data.csv", show_col_types = F)
 Load the model assignments
 
 ```{r}
-assignments <- read_csv("LL_model2.csv", show_col_types = FALSE)
+assignments <- read_csv("../LL_model2.csv", show_col_types = FALSE)
 ```
 
 Merge the two, to make sure we have the same data
@@ -74,15 +74,14 @@ full <- full_join(bdata, assignments, by="HCPID")
 # Group Differences in Response Switch
 
 ```{r}
-data_feedback <- full %>%
-  #group_by(HCPID, TrialType, BlockTypeCoded) %>%
+adata_feedback <- full %>%
+  group_by(HCPID, TrialType, BlockTypeCoded) %>%
   filter(!is.na(ResponseSwitch)) %>%
-  #summarise(ResponseSwitch = mean(ResponseSwitch),
-  #          RT = mean(RT),
-  #          Model=mlv(best.model),
-  #          deltaLL = mean(diff.LL)) %>%
-  #rename(Block = BlockTypeCoded) %>%
-  rename(Model = best.model) %>% 
+  summarise(ResponseSwitch = mean(ResponseSwitch),
+            RT = mean(RT),
+            Model=mlv(best.model),
+            deltaLL = mean(diff.LL)) %>%
+  rename(Block = BlockTypeCoded) %>%
   mutate(Block = recode(Block, MostlyReward = "Mostly Wins", MostlyPunishment = "Mostly Losses")) %>%
   mutate(TrialType = recode(TrialType, Reward = "Win", Punishment = "Loss", Neutral = "Neutral"))
 
@@ -92,16 +91,14 @@ data_feedback <- full %>%
 
 And now, let's visualize
 ```{r, fig.width=5, fig.height=5}
-adata_feedback <- data_feedback %>%
-  group_by(HCPID, Model, BlockTypeCoded) %>%
-  summarise(ResponseSwitch = mean(ResponseSwitch))
-  
-ggplot(adata_feedback, aes(x=BlockTypeCoded, y=ResponseSwitch, col=Model)) +
+ggplot(adata_feedback, aes(x=TrialType, y=ResponseSwitch, col=Model)) +
+  facet_wrap(~Block) +
   stat_summary(geom="point", fun.data="mean_se", size=3) +
   stat_summary(geom="errorbar", fun.data = "mean_se", width=0.1) +
   stat_summary(geom="line", aes(group=Model), fun.data="mean_se") +
   coord_cartesian(ylim=c(0, .75)) +
   ylab("Probability of Changing Response") +
+  xlab("Trial Type") +
   ggtitle("Group Differences in Responses") +
   scale_color_d3() +
   theme_minimal() +
@@ -113,10 +110,7 @@ ggsave("responseswitch.png", dpi=72)
 The analysis reveal a main effect of Model (Group):
 
 ```{r}
-mod_feedback <- glmer(ResponseSwitch ~ Model * BlockTypeCoded + (1|HCPID),  
-                      family="binomial", 
-                      weights=abs(diff.LL), 
-                      data=data_feedback)
+mod_feedback <- glmer(ResponseSwitch ~ best.model * BlockTypeCoded + (1|HCPID),  family="binomial", weights=abs(diff.LL), data=full)
 
 mod_feedback %>%
   tidy() %>%
@@ -234,6 +228,6 @@ ggsave("responsetimes.png", dpi=72)
 
 
 ```{r}
-mod_rt <- glmer(RT/1000 ~ Model * Block+ (1|HCPID), family="Gamma", weights = abs(deltaLL), adata_block)
-tab_model(mod_rt)
+mod3 <- glmer(RT ~ Model * Block+ (1|HCPID), family="Gamma", weights = abs(deltaLL), adata_block)
+tab_model(mod3)
 ```
