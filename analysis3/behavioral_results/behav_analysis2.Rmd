@@ -75,14 +75,14 @@ full <- full_join(bdata, assignments, by="HCPID")
 
 ```{r}
 adata_feedback <- full %>%
-  group_by(HCPID, TrialType, BlockTypeCoded) %>%
+  group_by(HCPID, TrialType) %>%
   filter(!is.na(ResponseSwitch)) %>%
   summarise(ResponseSwitch = mean(ResponseSwitch),
             RT = mean(RT),
             Model=mlv(best.model),
             deltaLL = mean(diff.LL)) %>%
-  rename(Block = BlockTypeCoded) %>%
-  mutate(Block = recode(Block, MostlyReward = "Mostly Wins", MostlyPunishment = "Mostly Losses")) %>%
+  #rename(Block = BlockTypeCoded) %>%
+  #mutate(Block = recode(Block, MostlyReward = "Mostly Wins", MostlyPunishment = "Mostly Losses")) %>%
   mutate(TrialType = recode(TrialType, Reward = "Win", Punishment = "Loss", Neutral = "Neutral"))
 
 
@@ -92,7 +92,7 @@ adata_feedback <- full %>%
 And now, let's visualize
 ```{r, fig.width=5, fig.height=5}
 ggplot(adata_feedback, aes(x=TrialType, y=ResponseSwitch, col=Model)) +
-  facet_wrap(~Block) +
+  #facet_wrap(~Block) +
   stat_summary(geom="point", fun.data="mean_se", size=3) +
   stat_summary(geom="errorbar", fun.data = "mean_se", width=0.1) +
   stat_summary(geom="line", aes(group=Model), fun.data="mean_se") +
@@ -110,7 +110,7 @@ ggsave("responseswitch.png", dpi=72)
 The analysis reveal a main effect of Model (Group):
 
 ```{r}
-mod_feedback <- glmer(ResponseSwitch ~ best.model * BlockTypeCoded + (1|HCPID),  family="binomial", weights=abs(diff.LL), data=full)
+mod_feedback <- glmer(ResponseSwitch ~ best.model *  TrialType + (1|HCPID),  family="binomial", weights=abs(diff.LL), data=filter(full, !is.na(ResponseSwitch)))
 
 mod_feedback %>%
   tidy() %>%
@@ -138,7 +138,7 @@ adata_block <- full %>%
 
 
 
-ggplot(adata_block, aes(x=Block, y=MaxPersistance, col=Model)) +
+ggplot(adata_block, aes(x=Block, y=Persistance, col=Model)) +
   stat_summary(geom="point", fun.data="mean_se", size=3) +
   stat_summary(geom="errorbar", fun.data = "mean_se", width=0.1) +
   stat_summary(geom="line", aes(group=Model), fun.data="mean_se") +
@@ -228,6 +228,6 @@ ggsave("responsetimes.png", dpi=72)
 
 
 ```{r}
-mod3 <- glmer(RT ~ Model * Block+ (1|HCPID), family="Gamma", weights = abs(deltaLL), adata_block)
+mod3 <- glmer(log(RT) ~ Model * Block + (1|HCPID), family="Gamma", weights = abs(deltaLL), adata_block)
 tab_model(mod3)
 ```
