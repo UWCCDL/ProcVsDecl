@@ -1956,6 +1956,81 @@ R<sup>2</sup> Tjur
 </td>
 </tr>
 </table>
+<p>as well as a t-test:</p>
+<pre class="r"><code>t.test(TempDiff ~ best.model, assignments, paired=F) %&gt;%
+  tidy() %&gt;%
+  kable() %&gt;%
+  kable_styling(bootstrap_options=c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+estimate
+</th>
+<th style="text-align:right;">
+estimate1
+</th>
+<th style="text-align:right;">
+estimate2
+</th>
+<th style="text-align:right;">
+statistic
+</th>
+<th style="text-align:right;">
+p.value
+</th>
+<th style="text-align:right;">
+parameter
+</th>
+<th style="text-align:right;">
+conf.low
+</th>
+<th style="text-align:right;">
+conf.high
+</th>
+<th style="text-align:left;">
+method
+</th>
+<th style="text-align:left;">
+alternative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.534696
+</td>
+<td style="text-align:right;">
+-0.465117
+</td>
+<td style="text-align:right;">
+-0.9998131
+</td>
+<td style="text-align:right;">
+3.370493
+</td>
+<td style="text-align:right;">
+0.0014527
+</td>
+<td style="text-align:right;">
+50.04137
+</td>
+<td style="text-align:right;">
+0.2160641
+</td>
+<td style="text-align:right;">
+0.853328
+</td>
+<td style="text-align:left;">
+Welch Two Sample t-test
+</td>
+<td style="text-align:left;">
+two.sided
+</td>
+</tr>
+</tbody>
+</table>
 <p>It is difficult to conceptualize alpha vs. decay, but we can plot
 them:</p>
 <pre class="r"><code>ggplot(assignments, aes(x=(decay*decl.temp), y=alpha/proc.temp, col=best.model, size=abs(diff.LL))) +
@@ -2056,16 +2131,16 @@ NA
 (Intercept)
 </td>
 <td style="text-align:right;">
--1.1878759
+-1.1836305
 </td>
 <td style="text-align:right;">
-0.3163446
+0.3465174
 </td>
 <td style="text-align:right;">
--3.7550063
+-3.4157896
 </td>
 <td style="text-align:right;">
-0.0001733
+0.0006360
 </td>
 </tr>
 <tr>
@@ -2079,16 +2154,16 @@ NA
 best.modelProcedural
 </td>
 <td style="text-align:right;">
-0.8892102
+0.8815376
 </td>
 <td style="text-align:right;">
-0.3266855
+0.3562312
 </td>
 <td style="text-align:right;">
-2.7219153
+2.4746218
 </td>
 <td style="text-align:right;">
-0.0064905
+0.0133377
 </td>
 </tr>
 <tr>
@@ -2102,16 +2177,16 @@ NA
 TrialTypePunishment
 </td>
 <td style="text-align:right;">
-1.1294605
+1.1284508
 </td>
 <td style="text-align:right;">
-0.2918238
+0.3298362
 </td>
 <td style="text-align:right;">
-3.8703508
+3.4212458
 </td>
 <td style="text-align:right;">
-0.0001087
+0.0006233
 </td>
 </tr>
 <tr>
@@ -2125,16 +2200,16 @@ NA
 TrialTypeReward
 </td>
 <td style="text-align:right;">
-0.0626947
+0.0572946
 </td>
 <td style="text-align:right;">
-0.2560891
+0.2780625
 </td>
 <td style="text-align:right;">
-0.2448160
+0.2060492
 </td>
 <td style="text-align:right;">
-0.8065989
+0.8367525
 </td>
 </tr>
 <tr>
@@ -2148,16 +2223,16 @@ NA
 best.modelProcedural:TrialTypePunishment
 </td>
 <td style="text-align:right;">
--0.9588253
+-0.9495552
 </td>
 <td style="text-align:right;">
-0.2934637
+0.3312294
 </td>
 <td style="text-align:right;">
--3.2672704
+-2.8667601
 </td>
 <td style="text-align:right;">
-0.0010859
+0.0041470
 </td>
 </tr>
 <tr>
@@ -2171,16 +2246,16 @@ NA
 best.modelProcedural:TrialTypeReward
 </td>
 <td style="text-align:right;">
-0.0095118
+0.0154607
 </td>
 <td style="text-align:right;">
-0.2578738
+0.2797005
 </td>
 <td style="text-align:right;">
-0.0368854
+0.0552760
 </td>
 <td style="text-align:right;">
-0.9705764
+0.9559186
 </td>
 </tr>
 <tr>
@@ -2194,7 +2269,7 @@ HCPID
 sd__(Intercept)
 </td>
 <td style="text-align:right;">
-0.9410270
+0.9572277
 </td>
 <td style="text-align:right;">
 NA
@@ -2237,13 +2312,13 @@ p
 (Intercept)
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.30
+0.31
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.16 – 0.57
+0.16 – 0.60
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001</strong>
+<strong>0.001</strong>
 </td>
 </tr>
 <tr>
@@ -2251,13 +2326,13 @@ p
 best model [Procedural]
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-2.43
+2.41
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.28 – 4.62
+1.20 – 4.85
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>0.006</strong>
+<strong>0.013</strong>
 </td>
 </tr>
 <tr>
@@ -2268,10 +2343,10 @@ TrialType [Punishment]
 3.09
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.75 – 5.48
+1.62 – 5.90
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001</strong>
+<strong>0.001</strong>
 </td>
 </tr>
 <tr>
@@ -2282,10 +2357,10 @@ TrialType [Reward]
 1.06
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.64 – 1.76
+0.61 – 1.83
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.807
+0.837
 </td>
 </tr>
 <tr>
@@ -2293,13 +2368,13 @@ TrialType [Reward]
 best model [Procedural] ×<br>TrialType [Punishment]
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.38
+0.39
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.22 – 0.68
+0.20 – 0.74
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>0.001</strong>
+<strong>0.004</strong>
 </td>
 </tr>
 <tr>
@@ -2307,13 +2382,13 @@ best model [Procedural] ×<br>TrialType [Punishment]
 best model [Procedural] ×<br>TrialType [Reward]
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.01
+1.02
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.61 – 1.67
+0.59 – 1.76
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.971
+0.956
 </td>
 </tr>
 <tr>
@@ -2334,14 +2409,14 @@ Random Effects
 τ<sub>00</sub> <sub>HCPID</sub>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
-0.89
+0.92
 </td>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
 ICC
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
-0.21
+0.22
 </td>
 <tr>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
@@ -2363,7 +2438,7 @@ Observations
 Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
 </td>
 <td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
-0.189 / 0.361
+0.161 / 0.344
 </td>
 </tr>
 </table>

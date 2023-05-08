@@ -1,20 +1,21 @@
-# Analysis 2 (complete data)
+# Analysis 3
 
 This is the complete analysis of Cher's [project](https://www.biorxiv.org/content/10.1101/2023.01.10.523458v1.abstract), but extended to all the trials in the dataset and  using a Python reimplementation of the Declarative and Procedural subsystems in ACT-R.
 
 ## Results
 
-In the new analysis, individuals best-fit by the Declarative model show significant behavioral differences when compared to individuals best-fit by the Procedural model.  These differences are apparent in:
+In the new analysis, individuals best-fit by the Declarative model show significant behavioral differences when compared to individuals best-fit by the Procedural model. 
 
-1. The probability of changing response from trial to trial
+In the model assignment procedure, both model recovery and parameter recovery are highly reliable:
 
-![Probability of Response Switch](responseswitch.png) 
+Here is the confusion matix for model recovery:
 
-2. The maximum number of consecutive identical responses
+![Model Recovery](model-recovery.png)
 
-![Maximum number of identical responses](persistance.png)
+And the correlation values for parameter recovery:
 
-3. The associated response times
+![Parameter Recovery](parameter-recovery.png)
+ 
 
-![Response times](responsetimes.png)  
+
 

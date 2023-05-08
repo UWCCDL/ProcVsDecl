@@ -104,6 +104,15 @@ mod <- glm(Procedural ~ TempDiff,
 tab_model(mod)
 ```
 
+as well as a t-test:
+
+```{r}
+t.test(TempDiff ~ best.model, assignments, paired=F) %>%
+  tidy() %>%
+  kable() %>%
+  kable_styling(bootstrap_options=c("striped", "hover"))
+```
+
 It is difficult to conceptualize alpha vs. decay, but we can plot them:
 
 ```{r}
