@@ -305,3 +305,26 @@ mod3 <- glmer(log(RT) ~ Model * Block + (1|HCPID),
               byblock)
 tab_model(mod3)
 ```
+
+
+```{r, fig.width=6, fig.height=2}  
+model <- read_csv("../LL_model2.csv")
+model %>%pivot_longer(cols=c("alpha", "proc.temp", "decay", "decl.temp", "diff.LL"), names_to = "Parameter", values_to = "Values") -> lmodel
+
+lmodel %>%
+  mutate(Parameter = replace(Parameter, Parameter == "diff.LL", "W")) %>%
+  mutate(Parameter = replace(Parameter, Parameter == "decay", "d")) %>%
+  mutate(Parameter = replace(Parameter, Parameter == "proc.temp", "T")) %>%
+  mutate(Parameter = replace(Parameter, Parameter == "decl.temp", "S")) -> lmodel
+
+ggplot(filter(lmodel, HCPID %in% c("156233_fnca", "108828_fnca", "105014_fnca", "163129_fnca")), 
+       aes(x=Parameter, y = Values, fill=HCPID)) +
+ geom_col(alpha=0.5, width=0.5) +
+  #geom_line(aes(group=HCPID)) +
+ coord_polar() +
+  facet_wrap(~HCPID, ncol = 4) +
+ theme_minimal() +
+  xlab("") +
+  ylab("") +
+  theme(legend.position = "")
+```
