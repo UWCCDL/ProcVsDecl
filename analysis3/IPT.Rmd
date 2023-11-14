@@ -1,0 +1,106 @@
+---
+title: "IPT Visualization"
+output:
+  html_document:
+    code_folding: hide
+    theme: yeti
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+    toc_depth: '3'
+  word_document:
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r setup, include=FALSE, warning=FALSE}
+#knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(broom)
+library(broom.mixed)
+library(reshape2)
+library(glmnet)
+library(lme4)
+library(lmerTest)
+library(sjPlot)
+library(pscl)
+library(readr)
+
+#library(magrittr)
+## Graphics
+library(ggplot2)
+library(ggthemes)
+library(ggrepel)
+library(ggExtra)
+library(ggsci)
+library(scales)
+library(viridis)
+library(cowplot)
+
+## tables
+library(kableExtra)
+library(xtable)
+
+# Date functions
+library(anytime)
+library(lubridate)
+
+# SlimStampen
+library(SlimStampeRData)
+
+# Statistical Power Calculations
+library(simr)
+```
+
+```{r}
+data <- read_csv("~/Documents/Research/ProcVsDecl/analysis3/gambling_clean_data.csv")
+sdata <- filter(data, HCPID %in% c("100307_fnca", "123117_fnca"))
+
+sdata <- sdata %>%
+  mutate(Trial = (RunNumber -1)*32 + RunTrialNumber) %>%
+  mutate(Outcome = if_else(TrialType == "Punishment", -0.5, if_else(TrialType == "Neutral", 0, 1))) %>%
+  mutate(Action = if_else(CurrentResponse == 2.0, "More", "Less")) %>%
+  mutate(TrialCounter = rep(1:32, 4)) %>%
+  rename(Participant = HCPID, Run = RunNumber)
+```
+
+```{r, fig.height=3, fig.width=7}
+ggplot(sdata, aes(x=TrialCounter, y= Action, fill=TrialType)) +
+  geom_tile(col="white", width=0.75) +
+  facet_grid(cols=vars(Run), 
+             rows=vars(Participant),
+             labeller = label_both) +
+  xlab("Trial") +
+  scale_fill_discrete(type=(c("darkgrey", "skyblue", "tomato"))) +
+  theme_pander()
+```
+
+```{r, fig.height=3, fig.width=7}
+asdata <- sdata %>%
+  group_by(Participant, TrialType) %>%
+  summarise(PStay = 1 - mean(ResponseSwitch, na.rm=T))
+
+ggplot(asdata, aes(x=TrialType, y= PStay, fill=TrialType)) +
+  geom_col() +
+  facet_grid(cols=vars(Participant),
+             labeller = label_both) +
+  xlab("Trial Type") +
+  scale_fill_discrete(type=(c("darkgrey", "skyblue", "tomato"))) +
+  theme_pander()
+```
+
+```{r, fig.height=3, fig.width=7}
+pasdata <- sdata %>%
+  group_by(Participant) %>%
+  summarise(Perseverance = max(ConsecSameResp))
+
+ggplot(pasdata, aes(x=Participant, y= Perseverance)) +
+  geom_col() +
+  xlab("Participant") +
+  ylim(0, 10) +
+  geom_label(aes(label=paste("N =", Perseverance))) +
+  theme_pander()
+```

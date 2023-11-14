@@ -1,0 +1,71 @@
+Index	MNI (Peak)	Peak Anatomical Location	Brodmann Areas	AAL Locations	Size (voxels)	Peak intensity
+1	22, -82, -48	Cerebelum_Crus2_R (aal)	BA18 (3.35%); BA19 (2.04%); BA17 (1.38%); BA37 (1.25%); BA20 (0.64%); BA30 (0.58%); BA11 (0.53%); BA8 (0.37%); BA47 (0.37%); BA21 (0.25%); BA10 (0.23%); BA36 (0.22%); BA23 (0.22%); BA39 (0.20%); BA46 (0.18%); BA9 (0.15%); BA31 (0.11%); BA28 (0.10%); BA22 (0.10%); BA35 (0.10%); BA29 (0.09%); BA6 (0.08%); BA27 (0.07%); BA13 (0.07%); BA45 (0.05%); BA32 (0.05%); BA25 (0.04%); BA38 (0.01%); BA41 (0.01%);	Right Cerebelum_6_R (4.44%); Right Cerebelum_Crus1_R (4.16%); Left Cerebelum_6_L (3.82%); Left Cerebelum_Crus2_L (3.56%); Left Cerebelum_Crus1_L (3.38%); Right Fusiform gyrus (3.15%); Left Calcarine fissure and surrounding cortex (2.99%); Right Calcarine fissure and surrounding cortex (2.94%); Right Lingual gyrus (2.76%); Left Middle occipital gyrus (2.64%); Right Cerebelum_8_R (2.62%); Right Cerebelum_Crus2_R (2.35%); Left Cerebelum_8_L (2.15%); Right Middle temporal gyrus (2.14%); Left Fusiform gyrus (2.12%); Left Cerebelum_4_5_L (1.81%); Right Cerebelum_4_5_R (1.72%); Right Cerebelum_9_R (1.62%); Left Lingual gyrus (1.62%); Left Cerebelum_9_L (1.45%); Right Inferior frontal gyrus, orbital part (1.35%); Right Inferior temporal gyrus (1.27%); Right Middle occipital gyrus (1.21%); Vermis_6 (1.17%); Right Hippocampus (1.13%); Left Inferior occipital gyrus (1.12%); Left Inferior temporal gyrus (1.01%); Right Parahippocampal gyrus (0.99%); Right Inferior occipital gyrus (0.96%); Left Thalamus (0.84%); Right Thalamus (0.78%); Vermis_8 (0.77%); Left Cerebelum_7b_L (0.73%); Vermis_4_5 (0.70%); Left Superior occipital gyrus (0.65%); Vermis_7 (0.63%); Right Precuneus (0.63%); Left Hippocampus (0.61%); Right Insula (0.61%); Right Superior occipital gyrus (0.58%); Right Middle frontal gyrus (0.58%); Right Cerebelum_7b_R (0.55%); Vermis_9 (0.53%); Left Middle temporal gyrus (0.53%); Right Cuneus (0.52%); Left Cuneus (0.50%); Right Cerebelum_3_R (0.48%); Right Superior frontal gyrus, orbital part (0.46%); Right Inferior frontal gyrus, triangular part (0.45%); Right Superior frontal gyrus, medial orbital (0.39%); Right Gyrus rectus (0.39%); Right Posterior cingulate gyrus (0.33%); Left Gyrus rectus (0.32%); Left Parahippocampal gyrus (0.32%); Right Frontal_Med_Orb_R (0.31%); Vermis_3 (0.31%); Right Lenticular nucleus, putamen (0.30%); Right Superior frontal gyrus, medial (0.29%); Right Superior frontal gyrus, dorsolateral (0.28%); Left Superior frontal gyrus, medial (0.19%); Left Cerebelum_3_L (0.18%); Vermis_10 (0.14%); Right Superior temporal gyrus (0.13%); Right Temporal pole: superior temporal gyrus (0.13%); Right Inferior frontal gyrus, opercular part (0.13%); Right Amygdala (0.11%); Right Lenticular nucleus, pallidum (0.10%); Vermis_1_2 (0.09%); Left Posterior cingulate gyrus (0.08%); Right Temporal pole: middle temporal gyrus (0.06%); Right Cerebelum_10_R (0.06%); Right Anterior cingulate and paracingulate gyri (0.05%); Right Rolandic operculum (0.05%); Right Precental gyrus (0.04%); Left Angular gyrus (0.03%); Left Caudate nucleus (0.02%); Left Superior frontal gyrus, dorsolateral (0.01%); Left Frontal_Med_Orb_L (0.01%); Right Olfactory cortex (0.00%);	30662	14.09
+2	-12, -44, -62		-	-	12	6.20
+3	-4, -36, -62		-	-	8	4.27
+4	-42, -56, -48	Cerebelum_7b_L (aal)	-	Left Cerebelum_7b_L (40.00%); Left Cerebelum_8_L (40.00%); Left Cerebelum_Crus2_L (20.00%);	5	3.72
+5	32, 4, -48	brodmann area 38	BA20 (38.10%); BA38 (21.43%);	Right Fusiform gyrus (23.81%); Right Inferior temporal gyrus (19.05%); Right Temporal pole: middle temporal gyrus (2.38%);	42	8.95
+6	38, -6, -46	Temporal_Inf_R (aal)	BA20 (80.00%);	Right Inferior temporal gyrus (80.00%); Right Fusiform gyrus (20.00%);	5	6.57
+7	52, 8, -40	Temporal_Inf_R (aal)	BA21 (20.00%);	Right Inferior temporal gyrus (100.00%);	5	4.07
+8	-10, -18, -40		-	-	6	6.75
+9	-32, 14, -38	Temporal_Pole_Mid_L (aal)	BA38 (10.00%);	Left Temporal pole: middle temporal gyrus (86.67%); Left Inferior temporal gyrus (13.33%);	30	5.29
+10	-6, -16, -38	Pons	-	-	18	5.49
+11	42, 22, -38	Temporal_Pole_Mid_R (aal)	BA38 (7.14%);	Right Temporal pole: middle temporal gyrus (64.29%); Right Temporal pole: superior temporal gyrus (35.71%);	14	8.41
+12	-56, -8, -36	Temporal_Inf_L (aal)	BA20 (66.67%);	Left Inferior temporal gyrus (100.00%);	6	8.67
+13	52, 18, -28	Temporal_Pole_Mid_R (aal)	BA38 (70.00%);	Right Temporal pole: superior temporal gyrus (60.00%); Right Temporal pole: middle temporal gyrus (40.00%);	10	4.77
+14	-12, 14, -20	Frontal_Sup_Orb_L (aal)	BA25 (15.38%); BA47 (12.82%);	Left Olfactory cortex (38.46%); Left Superior frontal gyrus, orbital part (25.64%); Left Gyrus rectus (23.08%); Left Inferior frontal gyrus, orbital part (12.82%);	39	5.21
+15	-38, 28, -20	Frontal_Inf_Orb_L (aal)	BA47 (62.50%);	Left Inferior frontal gyrus, orbital part (87.50%); Left Temporal pole: superior temporal gyrus (12.50%);	8	7.13
+16	28, 32, -20	Frontal_Inf_Orb_R (aal)	BA11 (50.00%); BA47 (16.67%);	Right Inferior frontal gyrus, orbital part (66.67%); Right Superior frontal gyrus, medial orbital (33.33%);	6	3.90
+17	52, 0, -16	Temporal_Mid_R (aal)	BA21 (31.25%);	Right Middle temporal gyrus (37.50%); Right Superior temporal gyrus (37.50%); Right Temporal pole: middle temporal gyrus (12.50%); Right Temporal pole: superior temporal gyrus (12.50%);	16	3.23
+18	-34, 38, -18	Frontal_Inf_Orb_L (aal)	BA11 (36.00%);	Left Inferior frontal gyrus, orbital part (64.00%); Left Superior frontal gyrus, medial orbital (36.00%);	25	6.53
+19	-40, 46, -16	Frontal_Inf_Orb_L (aal)	BA11 (44.44%);	Left Inferior frontal gyrus, orbital part (55.56%); Left Superior frontal gyrus, medial orbital (44.44%);	18	6.08
+20	-40, 16, -4	Insula_L (aal)	BA47 (23.02%); BA13 (16.67%);	Left Insula (92.06%); Left Inferior frontal gyrus, orbital part (3.97%); Left Inferior frontal gyrus, triangular part (2.38%);	126	5.10
+21	-32, 0, 2	Putamen_L (aal)	-	Left Lenticular nucleus, putamen (56.72%); Left Insula (13.43%);	67	4.33
+22	-56, 30, 4	Frontal_Inf_Tri_L (aal)	BA47 (7.69%); BA45 (7.69%);	Left Inferior frontal gyrus, triangular part (100.00%);	13	5.69
+23	34, 62, 0	Frontal_Mid_R (aal)	BA10 (75.00%);	Right Middle frontal gyrus (62.50%); Right Superior frontal gyrus, dorsolateral (25.00%); Right Superior frontal gyrus, orbital part (12.50%);	8	3.78
+24	62, -26, 46	SupraMarginal_R (aal)	BA40 (22.73%); BA2 (9.32%); BA3 (7.46%); BA4 (5.94%); BA43 (3.85%); BA13 (1.63%); BA6 (1.17%); BA1 (1.17%);	Right Postcentral gyrus (34.73%); Right Supramarginal gyrus (34.27%); Right Inferior parietal, but supramarginal and angular gyri (17.60%); Right Rolandic operculum (11.89%); Right Heschl gyrus (0.82%); Right Insula (0.58%); Right Precental gyrus (0.12%);	858	7.48
+25	0, 24, 8	Corpus Callosum	-	-	10	3.54
+26	-38, 38, 8	Frontal_Inf_Tri_L (aal)	-	Left Inferior frontal gyrus, triangular part (93.94%); Left Middle frontal gyrus (6.06%);	33	4.21
+27	-24, 68, 16		BA10 (64.37%);	Left Middle frontal gyrus (24.14%); Left Superior frontal gyrus, dorsolateral (18.39%);	87	4.61
+28	48, -26, 10	Temporal_Sup_R (aal)	BA41 (28.57%);	Right Superior temporal gyrus (85.71%); Right Heschl gyrus (14.29%);	7	3.00
+29	60, 22, 10	Frontal_Inf_Tri_R (aal)	BA45 (100.00%);	Right Inferior frontal gyrus, triangular part (100.00%);	7	5.31
+30	40, 36, 14	Frontal_Inf_Tri_R (aal)	BA46 (34.62%); BA10 (15.38%);	Right Middle frontal gyrus (53.85%); Right Inferior frontal gyrus, triangular part (46.15%);	26	3.56
+31	28, 62, 24	Frontal_Mid_R (aal)	BA10 (67.12%);	Right Middle frontal gyrus (56.16%); Right Superior frontal gyrus, dorsolateral (39.73%);	73	5.47
+32	-2, -8, 12	White Matter	-	Left Thalamus (33.33%);	6	2.99
+33	8, 6, 14	Caudate Body	-	Right Caudate nucleus (37.50%);	8	3.55
+34	62, 16, 18	Frontal_Inf_Oper_R (aal)	BA44 (42.86%); BA45 (14.29%);	Right Inferior frontal gyrus, opercular part (100.00%);	7	4.84
+35	-22, 16, 16	White Matter	-	Left Caudate nucleus (14.29%);	14	3.69
+36	12, 24, 20	Corpus Callosum	BA32 (4.03%);	Right Anterior cingulate and paracingulate gyri (57.05%);	149	5.49
+37	-54, 20, 34	Frontal_Inf_Oper_L (aal)	BA46 (25.00%); BA9 (6.25%);	Left Inferior frontal gyrus, triangular part (50.00%); Left Middle frontal gyrus (37.50%); Left Inferior frontal gyrus, opercular part (6.25%);	48	4.58
+38	2, 70, 16		-	Right Superior frontal gyrus, medial (40.00%);	5	4.30
+39	42, 22, 18	White Matter	-	Right Inferior frontal gyrus, triangular part (40.00%);	30	3.44
+40	60, 22, 20	Frontal_Inf_Tri_R (aal)	BA45 (100.00%);	Right Inferior frontal gyrus, triangular part (100.00%);	5	7.10
+41	-6, 18, 26	Cingulum_Ant_L (aal)	BA24 (12.59%); BA32 (8.89%); BA33 (3.70%);	Left Anterior cingulate and paracingulate gyri (40.74%); Left Median cingulate and paracingulate gyri (10.37%);	135	4.90
+42	10, 70, 24		-	Right Superior frontal gyrus, medial (11.11%);	18	4.18
+43	58, 20, 28	Frontal_Inf_Oper_R (aal)	BA9 (28.57%); BA45 (28.57%); BA46 (14.29%);	Right Inferior frontal gyrus, opercular part (57.14%); Right Inferior frontal gyrus, triangular part (42.86%);	7	8.22
+44	-36, 36, 26	Frontal_Inf_Tri_L (aal)	-	Left Middle frontal gyrus (66.67%); Left Inferior frontal gyrus, triangular part (33.33%);	12	3.25
+45	-26, -26, 30	White Matter	-	-	50	3.99
+46	-46, 34, 36	Frontal_Mid_L (aal)	BA46 (66.67%); BA9 (11.11%);	Left Middle frontal gyrus (100.00%);	9	3.67
+47	14, -66, 30	Precuneus_R (aal)	BA7 (54.55%); BA31 (9.09%);	Right Precuneus (81.82%); Right Cuneus (18.18%);	11	3.18
+48	-16, -2, 30	White Matter	-	-	17	3.29
+49	-40, 2, 32	Precentral_L (aal)	BA9 (16.00%); BA6 (8.00%);	Left Precental gyrus (100.00%);	25	3.63
+50	-10, 36, 42	Frontal_Sup_Medial_L (aal)	BA9 (10.79%); BA6 (4.98%); BA32 (2.90%); BA8 (2.49%);	Left Superior frontal gyrus, medial (50.21%); Left Superior frontal gyrus, dorsolateral (39.83%); Left Middle frontal gyrus (2.90%); Left Median cingulate and paracingulate gyri (0.41%);	241	5.23
+51	-8, 62, 36	Frontal_Sup_Medial_L (aal)	-	Left Superior frontal gyrus, medial (40.00%); Left Superior frontal gyrus, dorsolateral (20.00%);	15	4.46
+52	42, 24, 50	Frontal_Mid_R (aal)	BA8 (35.71%); BA9 (28.57%);	Right Middle frontal gyrus (100.00%);	14	5.73
+53	42, 34, 44	Frontal_Mid_R (aal)	BA9 (60.00%); BA8 (40.00%);	Right Middle frontal gyrus (100.00%);	5	3.51
+54	16, -70, 40	Precuneus_R (aal)	-	Right Precuneus (100.00%);	5	3.04
+55	-18, -16, 44	White Matter	BA24 (16.67%);	Left Median cingulate and paracingulate gyri (16.67%);	18	3.53
+56	-40, -8, 52	Precentral_L (aal)	BA6 (51.35%);	Left Precental gyrus (91.89%); Left Postcentral gyrus (5.41%);	74	4.15
+57	-22, 4, 48	Frontal_Mid_L (aal)	BA6 (15.23%); BA32 (1.95%);	Left Superior frontal gyrus, dorsolateral (36.72%); Left Middle frontal gyrus (35.94%); Left Supplementary motor area (3.52%);	256	4.41
+58	0, -44, 46	Cingulum_Mid_L (aal)	-	Right Precuneus (80.00%); Left Median cingulate and paracingulate gyri (20.00%);	5	2.87
+59	8, -42, 46	Precuneus_R (aal)	-	Right Precuneus (57.14%); Right Median cingulate and paracingulate gyri (42.86%);	7	2.98
+60	-22, -40, 50	White Matter	BA5 (9.09%); BA3 (6.06%);	Left Postcentral gyrus (30.30%);	33	3.59
+61	-52, -50, 52	Parietal_Inf_L (aal)	BA40 (100.00%);	Left Inferior parietal, but supramarginal and angular gyri (100.00%);	5	3.73
+62	-44, -46, 54	Parietal_Inf_L (aal)	BA40 (38.64%);	Left Inferior parietal, but supramarginal and angular gyri (100.00%);	44	4.78
+63	-14, -34, 58	White Matter	BA6 (11.45%); BA3 (5.60%); BA4 (5.60%); BA5 (0.25%);	Left Paracentral lobule (43.00%); Left Postcentral gyrus (6.11%); Left Precuneus (4.07%); Left Precental gyrus (1.53%); Left Median cingulate and paracingulate gyri (0.76%); Left Supplementary motor area (0.25%); Right Paracentral lobule (0.25%);	393	5.55
+64	36, 14, 60	Frontal_Mid_R (aal)	BA6 (35.20%); BA8 (3.06%);	Right Middle frontal gyrus (96.94%); Right Superior frontal gyrus, dorsolateral (2.04%);	196	6.75
+65	-34, -60, 60	Parietal_Sup_L (aal)	BA7 (25.93%);	Left Superior parietal gyrus (100.00%);	27	4.15
+66	-22, 18, 56	Frontal_Sup_L (aal)	BA6 (11.11%); BA8 (11.11%);	Left Superior frontal gyrus, dorsolateral (100.00%);	9	3.04
+67	10, -22, 66	Supp_Motor_Area_R (aal)	BA6 (22.43%);	Right Paracentral lobule (43.93%); Right Supplementary motor area (29.91%); Right Precental gyrus (26.17%);	107	4.73
+68	22, -46, 72	Parietal_Sup_R (aal)	BA5 (9.30%); BA2 (6.98%); BA7 (4.65%);	Right Postcentral gyrus (72.09%); Right Superior parietal gyrus (27.91%);	43	6.46
+69	-2, -10, 74	Supp_Motor_Area_L (aal)	BA6 (50.00%);	Left Supplementary motor area (61.76%); Left Paracentral lobule (17.65%); Left Superior frontal gyrus, dorsolateral (11.76%); Right Supplementary motor area (8.82%);	34	4.18
+70	-18, -22, 76	Paracentral_Lobule_L (aal)	BA6 (25.00%);	Left Paracentral lobule (50.00%); Left Precental gyrus (50.00%);	12	3.77
