@@ -167,8 +167,8 @@ ggsave("responseswitch.png", dpi=72)
 The analysis reveal a main effect of Model (Group):
 
 ```{r}
-mod_feedback <- glmer(ResponseSwitch ~ best.model *  TrialType + (1|HCPID),  
-                      family="binomial", 
+mod_feedback <- glmer(ResponseSwitch ~ best.model *  TrialType + (1|HCPID) + (0 + TrialType|HCPID),  
+                      family="binomial",
                       weights=abs(diff.LL), 
                       data=filter(full, !is.na(ResponseSwitch)))
 
